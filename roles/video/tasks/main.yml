@@ -1,0 +1,11 @@
+- name: Install video and audio packages
+  package:
+    name:
+      - pulseaudio
+      - simplescreenrecorder
+      - youtube-dl
+      - openshot
+      - pavucontrol
+    state: present
+  tags:
+    - download
