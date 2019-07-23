@@ -6,6 +6,10 @@
       - youtube-dl
       - openshot
       - pavucontrol
+      - gimp
+      - ffmpeg
+      - cheese
+      - gvim
     state: present
   tags:
     - download
