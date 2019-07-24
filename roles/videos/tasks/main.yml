@@ -13,3 +13,12 @@
     state: present
   tags:
     - download
+
+- name: Configure Apache to serve wsgi python server for videos metadata update
+  template:
+      dest: /etc/apache2/sites-available
+      src: videos.conf
+
+- name: Add required directories
+  file:
+      path: '{{ 
