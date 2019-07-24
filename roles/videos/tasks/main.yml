@@ -9,7 +9,7 @@
       - gimp
       - ffmpeg
       - cheese
-      - gvim
+      - vim-gtk3
     state: present
   tags:
     - download
@@ -19,6 +19,15 @@
       dest: /etc/apache2/sites-available
       src: videos.conf
 
+- name: Enagle the videos config for apache
+  file:
+      src: /etc/apache2/sites-available/videos.conf
+      dest: /etc/apache2/sites-enabled/videos.conf
+      state: link
+
 - name: Add required directories
   file:
-      path: '{{ 
+      path: '{{ item }}'
+      state: directory
+  with_items:
+      - '{{ videos_protected_dir }}'

@@ -63,11 +63,11 @@ sys.stdout = sl
 stderr_logger = logging.getLogger('STDERR')
 sl = StreamToLogger(stderr_logger, logging.ERROR)
 sys.stderr = sl
-PORT={{ captive_portal_port }}
 
 
 # Define globals
 
+PORT=9458
 logger.debug("")
 logger.debug('##########################################')
 
@@ -176,8 +176,6 @@ def application (environ, start_response):
      environ['HTTP_HOST'] == "teredo.ipv6.microsoft.com.nsatc.net": 
      return microsoft(environ, start_response) 
 
-   logger.debug("executing the default 302 response. [%s"%data)
-   return put_302(environ,start_response)
 
 # Instantiate the server
 if __name__ == "__main__":
