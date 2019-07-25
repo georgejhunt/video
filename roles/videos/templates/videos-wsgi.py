@@ -8,9 +8,13 @@ from jinja2 import Environment, FileSystemLoader
 import json
 import sqlite3
 
+# avoid ansible template language, but make clear what localizes the code
+VIDEOS_REPO_DIR = "/opt/iiab/videos"
+VIDEOS_BASE = VIDEOS_REPO_DIR + "/assets"
+
 # Create the jinja2 environment.
-VIDEOS_BASE = "/opt/iiab/video/assets"
 j2_env = Environment(loader=FileSystemLoader(VIDEOS_BASE),trim_blocks=True)
+#import pdb;pdb.set_trace()
 
 # Create an interface to sqlite3 database
 class Videos(object):
@@ -41,6 +45,16 @@ def one():
     rv = "hello world"
     return str(rv)
 
+
+@application.route('/viewer')
+def viewer():
+    response_body = str(j2_env.get_template("viewer.html").render())
+    return response_body
+    
+@application.route('/viewer.css')
+def viewer_css():
+    image = open("%s/assets/viewer.css"%VIDEOS_REPO_DIR, "rb").read() 
+    return image
     
 if __name__ == "__main__":
     application.run(host='0.0.0.0',port=9458)
