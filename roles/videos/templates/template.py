@@ -34,7 +34,7 @@ class Videos(object):
       return out
 
 
-
+application = Flask(__name__)
 @application.route('/')
 def one():
     rv = "hello world"

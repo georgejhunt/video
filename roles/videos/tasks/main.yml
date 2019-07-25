@@ -10,6 +10,7 @@
       - ffmpeg
       - cheese
       - vim-gtk3
+      - python-flask
     state: present
   tags:
     - download
