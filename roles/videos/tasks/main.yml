@@ -1,0 +1,34 @@
+- name: Install video and audio packages
+  package:
+    name:
+      - pulseaudio
+      - simplescreenrecorder
+      - youtube-dl
+      - openshot
+      - pavucontrol
+      - gimp
+      - ffmpeg
+      - cheese
+      - vim-gtk3
+      - python-flask
+    state: present
+  tags:
+    - download
+
+- name: Configure Apache to serve wsgi python server for videos metadata update
+  template:
+      dest: /etc/apache2/sites-available
+      src: videos.conf
+
+- name: Enagle the videos config for apache
+  file:
+      src: /etc/apache2/sites-available/videos.conf
+      dest: /etc/apache2/sites-enabled/videos.conf
+      state: link
+
+- name: Add required directories
+  file:
+      path: '{{ item }}'
+      state: directory
+  with_items:
+      - '{{ videos_protected_dir }}'
